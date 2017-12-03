@@ -1,14 +1,15 @@
 // @flow
 
-function calculateChecksum(input: string): number {
-  let arrays: Array<Array<number>> = input
-    .split('\n')
-    .filter(Boolean)
-    .map(array => array.split('\t').map(str => parseInt(str, 10)))
-  return arrays.reduce((total, array) => {
-    let difference = Math.max.apply(null, array) - Math.min.apply(null, array)
-    return total + difference
-  }, 0)
+function createChecksumCalculator(
+  reducer: (total: number, array: Array<number>) => number
+) {
+  return function(input: string): number {
+    let arrays: Array<Array<number>> = input
+      .split('\n')
+      .filter(Boolean)
+      .map(array => array.split('\t').map(str => parseInt(str, 10)))
+    return arrays.reduce(reducer, 0)
+  }
 }
 
-module.exports = calculateChecksum
+module.exports = createChecksumCalculator
