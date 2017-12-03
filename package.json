@@ -5,10 +5,16 @@
   "author": "Macklin Underdown <macklinu@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && flow check",
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.34",
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/preset-flow": "^7.0.0-beta.34",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^21.2.0",
+    "flow-bin": "^0.60.1",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^6.0.0",
