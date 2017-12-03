@@ -1,0 +1,17 @@
+{
+  "name": "advent-of-code-2017",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Macklin Underdown <macklinu@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "jest": "^21.2.1",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.8.2"
+  }
+}
