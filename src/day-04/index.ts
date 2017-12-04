@@ -1,6 +1,4 @@
-// @flow
-
-function createPassphraseValidator(
+export function createPassphraseValidator(
   reducer: (sum: number, array: string[]) => number
 ) {
   return function(input: string): number {
@@ -11,5 +9,3 @@ function createPassphraseValidator(
       .reduce(reducer, 0)
   }
 }
-
-module.exports = createPassphraseValidator

@@ -1,9 +1,7 @@
-// @flow
-
-function createInverseCaptchaSolver(
+export function createInverseCaptchaSolver(
   nextItemPredicate: (index: number, length: number) => number
 ) {
-  return function(input: string) {
+  return function(input: string): number {
     let numbers = input.split('').map(n => parseInt(n, 10))
     let length = numbers.length
     return numbers.reduce((prev, curr, index) => {
@@ -12,5 +10,3 @@ function createInverseCaptchaSolver(
     }, 0)
   }
 }
-
-module.exports = createInverseCaptchaSolver

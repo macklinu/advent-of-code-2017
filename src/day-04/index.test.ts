@@ -1,9 +1,8 @@
-// @flow
+import * as fs from 'fs'
+import * as path from 'path'
+import * as util from 'util'
 
-const fs = require('fs')
-const path = require('path')
-const util = require('util')
-const createPassphraseValidator = require('./')
+import { createPassphraseValidator } from './'
 
 async function getInput(filename: string): Promise<string> {
   const readFile = util.promisify(fs.readFile)
