@@ -1,13 +1,8 @@
-import * as fs from 'fs'
 import * as path from 'path'
-import * as util from 'util'
-
+import { readFile } from '../utils/test'
 import { createPassphraseValidator } from './'
 
-async function getInput(filename: string): Promise<string> {
-  const readFile = util.promisify(fs.readFile)
-  return await readFile(path.join(__dirname, filename), 'utf8')
-}
+const here = (p: string) => path.join(__dirname, p)
 
 describe('validatePassphrases()', () => {
   test('solves part 1', async () => {
@@ -15,7 +10,7 @@ describe('validatePassphrases()', () => {
       let set = new Set(array)
       return set.size === array.length ? sum + 1 : sum
     })
-    let input = await getInput('puzzle-input.txt')
+    let input = await readFile(here('puzzle-input.txt'))
     expect(validatePassphrases(input)).toBe(451)
   })
 
@@ -37,7 +32,7 @@ describe('validatePassphrases()', () => {
     expect(validatePassphrases('iiii oiii ooii oooi oooo')).toBe(1)
     expect(validatePassphrases('oiii ioii iioi iiio')).toBe(0)
 
-    let input = await getInput('puzzle-input.txt')
+    let input = await readFile(here('puzzle-input.txt'))
     expect(validatePassphrases(input)).toBe(223)
   })
 })

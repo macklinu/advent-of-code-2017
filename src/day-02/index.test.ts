@@ -1,13 +1,8 @@
-import * as fs from 'fs'
 import * as path from 'path'
-import * as util from 'util'
-
+import { readFile } from '../utils/test'
 import { createChecksumCalculator } from './'
 
-async function getInput(filename: string): Promise<string> {
-  const readFile = util.promisify(fs.readFile)
-  return await readFile(path.join(__dirname, filename), 'utf8')
-}
+const here = (p: string) => path.join(__dirname, p)
 
 describe('calculateChecksum()', () => {
   test('solves part 1', async () => {
@@ -19,8 +14,8 @@ describe('calculateChecksum()', () => {
       }
     )
 
-    let exampleInput = await getInput('part-one-example-input.txt')
-    let puzzleInput = await getInput('puzzle-input.txt')
+    let exampleInput = await readFile(here('part-one-example-input.txt'))
+    let puzzleInput = await readFile(here('puzzle-input.txt'))
     expect(calculateChecksum(exampleInput)).toBe(18)
     expect(calculateChecksum(puzzleInput)).toBe(47136)
   })
@@ -38,8 +33,8 @@ describe('calculateChecksum()', () => {
       }
     )
 
-    let exampleInput = await getInput('part-two-example-input.txt')
-    let puzzleInput = await getInput('puzzle-input.txt')
+    let exampleInput = await readFile(here('part-two-example-input.txt'))
+    let puzzleInput = await readFile(here('puzzle-input.txt'))
     expect(calculateChecksum(exampleInput)).toBe(9)
     expect(calculateChecksum(puzzleInput)).toBe(250)
   })
