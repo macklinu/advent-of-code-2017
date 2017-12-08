@@ -1,4 +1,9 @@
-export function processRegisters(input: string): number {
+const MAX = '__MAX__'
+
+export function processRegisters(
+  input: string,
+  keepTrackOfMax: boolean = false
+): number {
   let instructions = input
     .split('\n')
     .filter(Boolean)
@@ -31,14 +36,23 @@ export function processRegisters(input: string): number {
           changeType === 'inc'
             ? obj[registerToChange] + changeValue
             : obj[registerToChange] - changeValue
+
+        if (keepTrackOfMax && obj[registerToChange] > obj[MAX]) {
+          obj[MAX] = obj[registerToChange]
+        }
       }
 
       return obj
     },
-    {} as { [key: string]: number }
+    { [MAX]: -1 } as { [key: string]: number }
   )
 
-  return Math.max.apply(Math, Object.values(registerMap))
+  if (keepTrackOfMax) {
+    return registerMap[MAX]
+  } else {
+    delete registerMap[MAX]
+    return Math.max.apply(Math, Object.values(registerMap))
+  }
 }
 
 interface Instruction {
