@@ -1,5 +1,5 @@
 import puzzleInput from './puzzleInput'
-import { parseTrees } from './'
+import { findBottomProgram, determineWeightToBalanceTower } from './'
 
 let exampleInput = `pbga (66)
 xhth (57)
@@ -16,6 +16,10 @@ gyxo (61)
 cntj (57)`
 
 test('solves part 1', () => {
-  expect(parseTrees(exampleInput)).toBe('tknk')
-  expect(parseTrees(puzzleInput)).toBe('svugo')
+  expect(findBottomProgram(exampleInput)).toBe('tknk')
+  expect(findBottomProgram(puzzleInput)).toBe('svugo')
+})
+
+test.skip('solves part 2', () => {
+  expect(determineWeightToBalanceTower(exampleInput)).toBe(60)
 })

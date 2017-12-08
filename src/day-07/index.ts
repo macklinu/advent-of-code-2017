@@ -1,38 +1,47 @@
 interface Node {
   key: string
-  n: number
+  weight: number
   nodes: string[]
 }
 
 type MapOf<T> = { [key: string]: T }
 
-export function parseTrees(input: string): string {
-  let inputArray = input.split('\n').filter(Boolean)
+export function findBottomProgram(input: string): string {
+  let nodeMap = buildNodeMap(convertInputToLines(input))
 
-  let treeMap = inputArray.reduce(
+  let trees = Object.values(nodeMap)
+  let loneTrees = trees.filter(({ key }) =>
+    trees.every(({ nodes }) => !nodes.includes(key))
+  )
+
+  return loneTrees[0].key
+}
+
+export function determineWeightToBalanceTower(input: string): number {
+  let nodeMap = buildNodeMap(convertInputToLines(input))
+}
+
+function convertInputToLines(input: string): string[] {
+  return input.split('\n').filter(Boolean)
+}
+
+function buildNodeMap(lines: string[]): MapOf<Node> {
+  return lines.reduce(
     (obj, str) => {
       let match = str.match(/(\w+) \((\d+)\)(?: -> (.+))?/)
       if (match === null) {
         throw new Error(`Unable to parse input: ${str}`)
       }
 
-      let [, key, n, nodes] = match
+      let [, key, weight, nodes] = match
       return Object.assign(obj, {
         [key]: {
           key,
-          n: Number(n),
+          weight: Number(weight),
           nodes: nodes ? nodes.split(', ') : [],
         },
       })
     },
     {} as MapOf<Node>
   )
-
-  let trees = Object.values(treeMap)
-
-  let loneTrees = trees.filter(({ key }) =>
-    trees.every(({ nodes }) => !nodes.includes(key))
-  )
-
-  return loneTrees[0].key
 }
