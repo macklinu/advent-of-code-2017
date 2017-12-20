@@ -1,24 +1,20 @@
-import { watch } from 'fs'
-
-type Maze = string[][]
-type Char = ' ' | '+' | '-' | '|' | string
-
-const STARTING_CHAR = '|'
-
-export function puzzleSolver(input: string): string {
+export function puzzleSolver(
+  input: string
+): { characters: string; steps: number } {
   let maze = input
     .split('\n')
     .filter(Boolean)
     .map(str => str.split(''))
 
+  let steps = 0
   let found: string[] = []
-  let char = STARTING_CHAR
-  let position = new Vector(maze[0].findIndex(c => c === STARTING_CHAR), 0)
+  let char = '|'
+  let position = new Vector(maze[0].findIndex(c => c === '|'), 0)
   let direction = Direction.Down
 
   while (char !== ' ') {
-    function getCharAtPosition(maze: Maze, { x, y }: Vector): Char {
-      return (maze[y] !== undefined && (maze[y][x] as Char)) || ''
+    function getCharAtPosition(maze: string[][], { x, y }: Vector): string {
+      return (maze[y] !== undefined && maze[y][x]) || ''
     }
 
     position = position.add(direction)
@@ -39,9 +35,11 @@ export function puzzleSolver(input: string): string {
     if (char.match(/[A-Z]/)) {
       found.push(char)
     }
+
+    steps++
   }
 
-  return found.join('')
+  return { characters: found.join(''), steps }
 }
 
 class Vector {
