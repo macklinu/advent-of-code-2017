@@ -1,7 +1,21 @@
 export function calculateRedistributionCycles(input: string): number {
+  let { count } = calculate(toNumberArray(input))
+  return count
+}
+
+export function cyclesInInfiniteLoop(input: string): number {
+  let { arr } = calculate(toNumberArray(input))
+  let { count } = calculate(arr)
+  return count
+}
+
+function toNumberArray(input: string): number[] {
+  return input.split('\t').map(Number)
+}
+
+function calculate(arr: number[]): { count: number; arr: number[] } {
   let set = new Set()
   let count = 0
-  let arr = input.split('\t').map(Number)
 
   while (!set.has(stringify(arr))) {
     set.add(stringify(arr))
@@ -9,7 +23,7 @@ export function calculateRedistributionCycles(input: string): number {
     count++
   }
 
-  return count
+  return { count, arr }
 }
 
 function stringify(arr: number[]): string {
