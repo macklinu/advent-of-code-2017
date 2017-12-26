@@ -16,3 +16,20 @@ export function calculateScore(input: string): number {
 
   return score
 }
+
+export function countGarbage(input: string): number {
+  function stripSurroundingCarets(string: string) {
+    return string.substring(1, string.length - 1)
+  }
+
+  function sumStringLengths(sum: number, string: string): number {
+    return sum + string.length
+  }
+
+  let sanitized = input.replace(/([!])./g, '')
+  let match = sanitized.match(/<(.*?)>/g)
+
+  return match
+    ? match.map(stripSurroundingCarets).reduce(sumStringLengths, 0)
+    : 0
+}
