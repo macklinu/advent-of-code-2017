@@ -1,9 +1,22 @@
-export function createProgram(program: string = 'abcdefghijklmnop') {
+export function createProgram(
+  { program = 'abcdefghijklmnop', times = 1 } = {}
+) {
   return function(input: string): string {
     let instructions = input.split(',').filter(Boolean)
-    return instructions.reduce((s, instruction) => {
-      return parseInstruction(instruction)(s)
-    }, program)
+    let seed = program
+    let memo: string[] = []
+    let iterations = 0
+    while (iterations < times) {
+      seed = instructions.reduce((s, instruction) => {
+        return parseInstruction(instruction)(s)
+      }, seed)
+      if (memo.includes(seed)) {
+        return memo[times % memo.length - 1]
+      }
+      memo.push(seed)
+      iterations++
+    }
+    return seed
   }
 }
 
