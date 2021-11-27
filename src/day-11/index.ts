@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 class Vector {
   constructor(public readonly x: number, public readonly y: number) {}
 
@@ -6,7 +8,14 @@ class Vector {
   }
 }
 
-let directionToCoordinate: { [key: string]: Vector } = {
+let Direction = z.enum(['n', 's', 'ne', 'nw', 'se', 'sw'])
+type Direction = z.TypeOf<typeof Direction>
+
+function parseDirections(directions: string[]): Direction[] {
+  return z.array(Direction).parse(directions)
+}
+
+let directionToCoordinate: Record<Direction, Vector> = {
   n: new Vector(0, -1),
   s: new Vector(0, 1),
   ne: new Vector(1, -1),
@@ -20,7 +29,7 @@ function manhattanDistance({ x, y }: Vector): number {
 }
 
 export function numSteps(input: string): number {
-  let directions = input.split(',').filter(Boolean)
+  let directions = parseDirections(input.split(',').filter(Boolean))
 
   let vector = directions.reduce(
     (vector, direction) => vector.add(directionToCoordinate[direction]),
@@ -31,7 +40,7 @@ export function numSteps(input: string): number {
 }
 
 export function maxDistance(input: string): number {
-  let directions = input.split(',').filter(Boolean)
+  let directions = parseDirections(input.split(',').filter(Boolean))
   let vector = new Vector(0, 0)
   let distances: number[] = []
 

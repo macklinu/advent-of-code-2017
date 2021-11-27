@@ -4,8 +4,6 @@ interface Node {
   nodes: string[]
 }
 
-type MapOf<T> = { [key: string]: T }
-
 export function findBottomProgram(input: string): string {
   let nodeMap = buildNodeMap(convertInputToLines(input))
 
@@ -25,20 +23,21 @@ function convertInputToLines(input: string): string[] {
   return input.split('\n').filter(Boolean)
 }
 
-function buildNodeMap(lines: string[]): MapOf<Node> {
-  return lines.reduce((obj, str) => {
+function buildNodeMap(lines: string[]): Record<string, Node> {
+  return lines.reduce<Record<string, Node>>((obj, str) => {
     let match = str.match(/(\w+) \((\d+)\)(?: -> (.+))?/)
     if (match === null) {
       throw new Error(`Unable to parse input: ${str}`)
     }
 
     let [, key, weight, nodes] = match
-    return Object.assign(obj, {
+    return {
+      ...obj,
       [key]: {
         key,
         weight: Number(weight),
         nodes: nodes ? nodes.split(', ') : [],
       },
-    })
-  }, {} as MapOf<Node>)
+    }
+  }, {})
 }

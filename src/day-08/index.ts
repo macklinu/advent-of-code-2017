@@ -2,7 +2,7 @@ const MAX = '__MAX__'
 
 export function processRegisters(
   input: string,
-  keepTrackOfMax: boolean = false
+  { keepTrackOfMax = false }: { keepTrackOfMax?: boolean } = {}
 ): number {
   let instructions = input
     .split('\n')

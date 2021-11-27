@@ -1,9 +1,9 @@
-type State = [number, number, string]
+type State = [value: number, move: number, newState: string]
 
 interface Input {
   initialState: string
   steps: number
-  states: { [key: string]: [State, State] }
+  states: Record<string, [State, State]>
 }
 
 export function calculateDiagnosticChecksum({
@@ -11,7 +11,7 @@ export function calculateDiagnosticChecksum({
   steps,
   states,
 }: Input): number {
-  let tape: { [key: string]: number } = {}
+  let tape: Record<string, number> = {}
   let cursor = 0
   let state = initialState
 

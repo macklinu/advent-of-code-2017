@@ -6,7 +6,7 @@ const puzzleInput =
 describe('inverseCaptcha()', () => {
   test('solves part 1', () => {
     let inverseCaptcha = createInverseCaptchaSolver(
-      (index: number, length: number) => (index + 1) % length
+      (index, length) => (index + 1) % length
     )
     expect(inverseCaptcha('1122')).toBe(3)
     expect(inverseCaptcha('1111')).toBe(4)
@@ -17,7 +17,7 @@ describe('inverseCaptcha()', () => {
 
   test('solves part 2', () => {
     let inverseCaptcha = createInverseCaptchaSolver(
-      (index: number, length: number) => (index + length / 2) % length
+      (index, length) => (index + length / 2) % length
     )
     expect(inverseCaptcha('1212')).toBe(6)
     expect(inverseCaptcha('1221')).toBe(0)

@@ -1,7 +1,5 @@
-type MapOf<T> = { [key: string]: T }
-
 export function howManyGroups(input: string): number {
-  let program: MapOf<string[]> = input
+  let program: Record<string, string[]> = input
     .split('\n')
     .filter(Boolean)
     .reduce((obj, str) => {

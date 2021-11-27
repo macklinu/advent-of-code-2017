@@ -14,7 +14,7 @@ function toNumberArray(input: string): number[] {
 }
 
 function calculate(arr: number[]): { count: number; arr: number[] } {
-  let set = new Set()
+  let set = new Set<string>()
   let count = 0
 
   while (!set.has(stringify(arr))) {

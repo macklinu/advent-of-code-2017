@@ -13,6 +13,6 @@ test('solves part 1', () => {
 })
 
 test('solves part 2', () => {
-  expect(processRegisters(exampleInput, true)).toBe(10)
-  expect(processRegisters(puzzleInput, true)).toBe(7310)
+  expect(processRegisters(exampleInput, { keepTrackOfMax: true })).toBe(10)
+  expect(processRegisters(puzzleInput, { keepTrackOfMax: true })).toBe(7310)
 })
