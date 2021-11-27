@@ -20,7 +20,7 @@ export function knot(input: string, size: number): number[] {
 }
 
 function rotate(n: number) {
-  return function(array: number[]) {
+  return function (array: number[]) {
     return array.slice(n, array.length).concat(array.slice(0, n))
   }
 }

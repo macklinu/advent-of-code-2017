@@ -6,7 +6,7 @@ const here = (p: string) => path.join(__dirname, p)
 
 describe('calculateSteps()', () => {
   test('solves part 1', async () => {
-    let calculateSteps = createStepCalculator(instructions => {
+    let calculateSteps = createStepCalculator((instructions) => {
       let steps = 0
       let offset = 0
 
@@ -26,7 +26,7 @@ describe('calculateSteps()', () => {
   })
 
   test('solves part 2', async () => {
-    let calculateSteps = createStepCalculator(instructions => {
+    let calculateSteps = createStepCalculator((instructions) => {
       let steps = 0
       let offset = 0
 

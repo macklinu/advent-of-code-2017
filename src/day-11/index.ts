@@ -35,7 +35,7 @@ export function maxDistance(input: string): number {
   let vector = new Vector(0, 0)
   let distances: number[] = []
 
-  directions.forEach(direction => {
+  directions.forEach((direction) => {
     vector = vector.add(directionToCoordinate[direction])
     distances.push(manhattanDistance(vector))
   })

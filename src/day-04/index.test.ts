@@ -16,11 +16,8 @@ describe('validatePassphrases()', () => {
 
   test('solves part 2', async () => {
     let validatePassphrases = createPassphraseValidator((sum, array) => {
-      let sortedStrings = array.map(string => {
-        return string
-          .split('')
-          .sort()
-          .join('')
+      let sortedStrings = array.map((string) => {
+        return string.split('').sort().join('')
       })
       let set = new Set(sortedStrings)
       return set.size === array.length ? sum + 1 : sum

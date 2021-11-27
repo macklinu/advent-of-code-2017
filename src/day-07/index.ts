@@ -26,22 +26,19 @@ function convertInputToLines(input: string): string[] {
 }
 
 function buildNodeMap(lines: string[]): MapOf<Node> {
-  return lines.reduce(
-    (obj, str) => {
-      let match = str.match(/(\w+) \((\d+)\)(?: -> (.+))?/)
-      if (match === null) {
-        throw new Error(`Unable to parse input: ${str}`)
-      }
+  return lines.reduce((obj, str) => {
+    let match = str.match(/(\w+) \((\d+)\)(?: -> (.+))?/)
+    if (match === null) {
+      throw new Error(`Unable to parse input: ${str}`)
+    }
 
-      let [, key, weight, nodes] = match
-      return Object.assign(obj, {
-        [key]: {
-          key,
-          weight: Number(weight),
-          nodes: nodes ? nodes.split(', ') : [],
-        },
-      })
-    },
-    {} as MapOf<Node>
-  )
+    let [, key, weight, nodes] = match
+    return Object.assign(obj, {
+      [key]: {
+        key,
+        weight: Number(weight),
+        nodes: nodes ? nodes.split(', ') : [],
+      },
+    })
+  }, {} as MapOf<Node>)
 }

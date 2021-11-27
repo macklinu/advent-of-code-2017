@@ -1,15 +1,19 @@
-export function puzzleSolver(
-  input: string
-): { characters: string; steps: number } {
+export function puzzleSolver(input: string): {
+  characters: string
+  steps: number
+} {
   let maze = input
     .split('\n')
     .filter(Boolean)
-    .map(str => str.split(''))
+    .map((str) => str.split(''))
 
   let steps = 0
   let found: string[] = []
   let char = '|'
-  let position = new Vector(maze[0].findIndex(c => c === '|'), 0)
+  let position = new Vector(
+    maze[0].findIndex((c) => c === '|'),
+    0
+  )
   let direction = Direction.Down
 
   while (char !== ' ') {

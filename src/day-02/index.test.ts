@@ -26,7 +26,9 @@ describe('calculateChecksum()', () => {
         return (
           sum +
           array.reduce((prev, curr, _i, arr) => {
-            let divisor = arr.filter(v => v !== curr).find(v => curr % v === 0)
+            let divisor = arr
+              .filter((v) => v !== curr)
+              .find((v) => curr % v === 0)
             return divisor ? prev + curr / divisor : prev
           }, 0)
         )

@@ -7,7 +7,7 @@ export function processRegisters(
   let instructions = input
     .split('\n')
     .filter(Boolean)
-    .map(str => str.trim())
+    .map((str) => str.trim())
 
   let registerMap = instructions.reduce(
     (obj, str) => {

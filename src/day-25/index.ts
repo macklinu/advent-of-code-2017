@@ -22,5 +22,5 @@ export function calculateDiagnosticChecksum({
     state = newState
   }
 
-  return Object.values(tape).filter(n => n === 1).length
+  return Object.values(tape).filter((n) => n === 1).length
 }

@@ -12,8 +12,8 @@ export function howManyGroups(input: string): number {
   function traverse(nodes: string[], set: Set<string>): Set<string> {
     return nodes.reduce((set, node) => {
       let programNodes = program[node]
-      let notInTheSet = programNodes.filter(n => !set.has(n))
-      notInTheSet.forEach(n => {
+      let notInTheSet = programNodes.filter((n) => !set.has(n))
+      notInTheSet.forEach((n) => {
         set.add(n)
       })
       return traverse(notInTheSet, set)
